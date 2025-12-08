@@ -83,7 +83,7 @@ export default function DashboardPage({ onNavigate, onOpenDrawer }: DashboardPag
             </svg>
           </div>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide -mx-1 px-1">
+        <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide -mx-1 px-1" style={{ WebkitOverflowScrolling: 'touch' }}>
           <button className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95">
             Glass Bottle
           </button>

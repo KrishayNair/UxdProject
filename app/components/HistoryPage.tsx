@@ -75,7 +75,7 @@ export default function HistoryPage({ variant = 'history' }: HistoryPageProps) {
               View All <span className="ml-1">→</span>
             </a>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             <div className="bg-green-800/20 border border-green-600 rounded-xl p-4 min-w-[280px] flex-shrink-0">
               <h3 className="text-lg font-medium mb-1">Morning Chat Christmas Presents</h3>
               <p className="text-sm text-gray-400 mb-4">03-12-16</p>
@@ -108,7 +108,7 @@ export default function HistoryPage({ variant = 'history' }: HistoryPageProps) {
               View All <span className="ml-1">→</span>
             </a>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             <button className="bg-green-800/30 border border-green-600 rounded-full px-6 py-2 whitespace-nowrap text-sm flex-shrink-0">
               The green bottle of whisky
             </button>
@@ -129,7 +129,7 @@ export default function HistoryPage({ variant = 'history' }: HistoryPageProps) {
               View All <span className="ml-1">→</span>
             </a>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             <button className="bg-green-800/30 border border-green-600 rounded-full px-6 py-2 whitespace-nowrap text-sm flex-shrink-0">
               Feature name
             </button>
@@ -150,7 +150,7 @@ export default function HistoryPage({ variant = 'history' }: HistoryPageProps) {
               View All <span className="ml-1">→</span>
             </a>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             <button className="bg-green-800/30 border border-green-600 rounded-full px-6 py-2 whitespace-nowrap text-sm flex-shrink-0">
               Candle and Coffee
             </button>

@@ -75,7 +75,7 @@ export default function HomePage() {
               View All <span className="ml-1">→</span>
             </a>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
             <button className="bg-green-800/30 border border-green-600 rounded-full px-6 py-2 whitespace-nowrap text-sm">
               The gift for my Wedding
             </button>

@@ -109,7 +109,7 @@ export default function App() {
         />
 
         {/* Main Content */}
-        <div className="relative z-10 h-full overflow-y-auto" style={{ paddingBottom: showBottomNav ? '80px' : '0' }}>
+        <div className="relative z-10 h-full overflow-y-auto scrollbar-hide" style={{ paddingBottom: showBottomNav ? '80px' : '0', WebkitOverflowScrolling: 'touch' }}>
           {getCurrentPage()}
         </div>
 

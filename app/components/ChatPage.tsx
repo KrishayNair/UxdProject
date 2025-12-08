@@ -128,7 +128,7 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
         </div>
 
         {/* Chat Messages */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
+        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
           {messages.map((msg, idx) => (
             <div
               key={idx}
