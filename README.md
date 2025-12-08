@@ -1,4 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mobile App Prototype - Next.js
+
+A mobile-focused prototype application built with Next.js and Tailwind CSS, featuring a dark green gradient theme with navigation drawer and bottom navigation.
+
+## Features
+
+- **Mobile-first design** - Optimized for mobile viewport (375px max-width)
+- **Navigation Drawer** - Slide-out menu with expandable "Start a project" section
+- **Bottom Navigation** - Dynamic navigation bar with different icon sets based on active tab
+- **History Pages** - Multiple variants showing saved chats, scan history, chat history, and live history
+- **Interactive Components** - All buttons and navigation items are fully functional
+- **Responsive Layout** - Fixed mobile container size for consistent mobile app appearance
+
+## Getting Started
+
+First, install dependencies:
+
+```bash
+npm install
+```
+
+Then, run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the mobile app prototype.
+
+## Project Structure
+
+- `app/components/` - React components
+  - `NavigationDrawer.tsx` - Side navigation with expandable sections
+  - `BottomNav.tsx` - Bottom navigation bar
+  - `HistoryPage.tsx` - History page with multiple variants
+  - `HomePage.tsx` - Home page component
+- `app/page.tsx` - Main app page with mobile container
+- `app/globals.css` - Global styles and Tailwind configuration
+
+## Design
+
+The app features:
+- Dark green to black gradient background
+- Light green/white text and icons
+- Mobile-focused layout (max-width: 375px)
+- Smooth transitions and interactions
 
 ## Getting Started
 

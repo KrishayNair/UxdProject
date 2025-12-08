@@ -1,65 +1,137 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import NavigationDrawer from './components/NavigationDrawer';
+import BottomNav from './components/BottomNav';
+import DashboardPage from './components/DashboardPage';
+import ProgressPage from './components/ProgressPage';
+import HistoryPage from './components/HistoryPage';
+import ScanPage from './components/ScanPage';
+import ChatPage from './components/ChatPage';
+
+type Screen = 'dashboard' | 'progress' | 'history' | 'scan' | 'chat' | 'voice-chat' | 'waste-info' | 'featured';
+type BottomTab = 'home' | 'progress' | 'history' | 'profile';
+
+export default function App() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState<Screen>('dashboard');
+  const [activeTab, setActiveTab] = useState<BottomTab>('home');
+  const [scanMode, setScanMode] = useState<'waste' | 'upcycle'>('waste');
+
+  const handleTabChange = (tab: BottomTab) => {
+    setActiveTab(tab);
+    setIsDrawerOpen(false);
+    
+    // Map bottom nav to screens
+    if (tab === 'home') {
+      setCurrentScreen('dashboard');
+    } else if (tab === 'progress') {
+      setCurrentScreen('progress');
+    } else if (tab === 'history') {
+      setCurrentScreen('history');
+    }
+  };
+
+  const navigateToScreen = (screen: Screen, mode?: 'waste' | 'upcycle') => {
+    setCurrentScreen(screen);
+    setIsDrawerOpen(false);
+    if (mode && screen === 'scan') {
+      setScanMode(mode);
+    }
+  };
+
+  const handleBack = () => {
+    // Navigate back to dashboard
+    setCurrentScreen('dashboard');
+    setActiveTab('home');
+  };
+
+  // Determine which page to show based on current screen
+  const getCurrentPage = () => {
+    switch (currentScreen) {
+      case 'dashboard':
+        return <DashboardPage 
+          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => navigateToScreen(screen as Screen, mode)}
+          onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
+        />;
+      case 'progress':
+        return <ProgressPage />;
+      case 'history':
+        return <HistoryPage variant="history" />;
+      case 'scan':
+        return <ScanPage onBack={handleBack} mode={scanMode} />;
+      case 'chat':
+        return <ChatPage onBack={handleBack} initialMode="menu" />;
+      case 'voice-chat':
+        return <ChatPage onBack={handleBack} initialMode="voice" />;
+      case 'waste-info':
+        return <ChatPage onBack={handleBack} initialMode="chat" />;
+      case 'featured':
+        return <DashboardPage 
+          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => navigateToScreen(screen as Screen, mode)}
+          onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
+        />;
+      default:
+        return <DashboardPage 
+          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => navigateToScreen(screen as Screen, mode)}
+          onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
+        />;
+    }
+  };
+
+  const showBottomNav = !['scan', 'chat', 'voice-chat', 'waste-info'].includes(currentScreen);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
+      {/* Mobile Container - max width 375px to match mobile screenshots */}
+      <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+        {/* Navigation Drawer */}
+        <NavigationDrawer
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          onNavigate={(path) => {
+            if (path === 'home') {
+              setCurrentScreen('dashboard');
+              setActiveTab('home');
+            } else if (path === 'progress') {
+              setCurrentScreen('progress');
+              setActiveTab('progress');
+            } else if (path === 'history') {
+              setCurrentScreen('history');
+              setActiveTab('history');
+            } else if (path === 'scan') {
+              setScanMode('waste');
+              setCurrentScreen('scan');
+            } else if (path === 'chat') {
+              setCurrentScreen('chat');
+            }
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        {/* Main Content */}
+        <div className="relative z-10 h-full overflow-y-auto" style={{ paddingBottom: showBottomNav ? '80px' : '0' }}>
+          {getCurrentPage()}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {/* Bottom Navigation - only show on main screens */}
+        {showBottomNav && (
+          <BottomNav 
+            activeTab={activeTab} 
+            onTabChange={(tab) => {
+              handleTabChange(tab);
+              // Update active tab based on screen
+              if (tab === 'home') {
+                setCurrentScreen('dashboard');
+              } else if (tab === 'progress') {
+                setCurrentScreen('progress');
+              } else if (tab === 'history') {
+                setCurrentScreen('history');
+              }
+            }}
+            variant={activeTab === 'progress' ? 'progress' : 'default'}
+          />
+        )}
+      </div>
     </div>
   );
 }
