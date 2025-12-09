@@ -51,29 +51,58 @@ export default function App() {
     switch (currentScreen) {
       case 'dashboard':
         return <DashboardPage 
-          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => navigateToScreen(screen as Screen, mode)}
+          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => {
+            navigateToScreen(screen as Screen, mode);
+            if (screen === 'history') {
+              setActiveTab('history');
+            }
+          }}
           onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
         />;
       case 'progress':
-        return <ProgressPage />;
+        return <ProgressPage onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined} />;
       case 'history':
-        return <HistoryPage variant="history" />;
+        return <HistoryPage 
+          variant="history" 
+          onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
+          onNavigate={(screen) => navigateToScreen(screen as Screen)}
+        />;
+      case 'previous-projects':
+        return <HistoryPage 
+          variant="history" 
+          onNavigate={(screen) => navigateToScreen(screen as Screen)}
+        />;
       case 'scan':
-        return <ScanPage onBack={handleBack} mode={scanMode} />;
+        return <ScanPage 
+          onBack={handleBack} 
+          mode={scanMode} 
+          onOpenDrawer={() => setIsDrawerOpen(true)}
+          onNavigate={(screen) => navigateToScreen(screen as Screen)}
+        />;
       case 'chat':
-        return <ChatPage onBack={handleBack} initialMode="menu" />;
+        return <ChatPage onBack={handleBack} initialMode="menu" onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case 'voice-chat':
-        return <ChatPage onBack={handleBack} initialMode="voice" />;
+        return <ChatPage onBack={handleBack} initialMode="voice" onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case 'waste-info':
-        return <ChatPage onBack={handleBack} initialMode="chat" />;
+        return <ChatPage onBack={handleBack} initialMode="chat" onOpenDrawer={() => setIsDrawerOpen(true)} />;
       case 'featured':
         return <DashboardPage 
-          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => navigateToScreen(screen as Screen, mode)}
+          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => {
+            navigateToScreen(screen as Screen, mode);
+            if (screen === 'history') {
+              setActiveTab('history');
+            }
+          }}
           onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
         />;
       default:
         return <DashboardPage 
-          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => navigateToScreen(screen as Screen, mode)}
+          onNavigate={(screen: string, mode?: 'waste' | 'upcycle') => {
+            navigateToScreen(screen as Screen, mode);
+            if (screen === 'history') {
+              setActiveTab('history');
+            }
+          }}
           onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
         />;
     }

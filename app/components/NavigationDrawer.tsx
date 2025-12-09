@@ -107,25 +107,6 @@ export default function NavigationDrawer({ isOpen, onClose, onNavigate }: Naviga
                 </div>
               )}
             </div>
-            
-            <button
-              onClick={() => {
-                onNavigate?.('about');
-                onClose();
-              }}
-              className="py-3 border-b border-green-700 mt-2 text-left"
-            >
-              About
-            </button>
-            <button
-              onClick={() => {
-                onNavigate?.('settings');
-                onClose();
-              }}
-              className="py-3 border-b border-green-700 text-left"
-            >
-              Settings
-            </button>
           </nav>
           
           <button className="mt-auto py-3 text-green-300 font-medium">

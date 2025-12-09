@@ -5,9 +5,10 @@ import { useState } from 'react';
 interface ChatPageProps {
   onBack?: () => void;
   initialMode?: 'menu' | 'chat' | 'voice';
+  onOpenDrawer?: () => void;
 }
 
-export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps) {
+export default function ChatPage({ onBack, initialMode = 'menu', onOpenDrawer }: ChatPageProps) {
   const [mode, setMode] = useState<'menu' | 'chat' | 'voice'>(initialMode);
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [messages, setMessages] = useState<Array<{ text: string; sender: 'user' | 'bot' }>>([]);
@@ -33,6 +34,16 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
     }
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    setInputText('');
+    setSelectedOption('');
+    // If in chat mode, reset to menu
+    if (mode === 'chat') {
+      setMode('menu');
+    }
+  };
+
   if (mode === 'voice') {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
@@ -45,21 +56,26 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
               </svg>
             </button>
           )}
-          <button className="p-2 ml-auto">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {onOpenDrawer && (
+            <button 
+              onClick={onOpenDrawer}
+              className="p-2 ml-auto"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                />
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Content */}
@@ -110,21 +126,26 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
               </svg>
             </button>
           )}
-          <button className="p-2 ml-auto">
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {onOpenDrawer && (
+            <button 
+              onClick={onOpenDrawer}
+              className="p-2 ml-auto"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                />
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Chat Messages */}
@@ -150,7 +171,10 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
         {/* Input Area */}
         <div className="px-6 py-4 border-t border-green-700">
           <div className="flex items-center gap-3">
-            <button className="p-2 bg-green-800/50 rounded-lg">
+            <button 
+              onClick={handleClearChat}
+              className="p-2 bg-green-600 hover:bg-green-700 rounded-full transition-colors"
+            >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
@@ -174,29 +198,36 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
     <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-6 pt-12">
-        <button
-          onClick={() => onBack?.()}
-          className="p-2 -ml-2"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <button className="p-2">
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="p-2 -ml-2"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-            />
-          </svg>
-        </button>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
+        {onOpenDrawer && (
+          <button 
+            onClick={onOpenDrawer}
+            className="p-2 ml-auto"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Content */}
@@ -230,13 +261,19 @@ export default function ChatPage({ onBack, initialMode = 'menu' }: ChatPageProps
       {/* Input Area */}
       <div className="px-6 py-4 border-t border-green-700">
         <div className="flex items-center gap-3">
-          <button className="p-2 bg-green-800/50 rounded-lg">
+          <button 
+            onClick={handleClearChat}
+            className="p-2 bg-green-600 hover:bg-green-700 rounded-full transition-colors"
+          >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
           </button>
           <input
             type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             placeholder="Type a message..."
             className="flex-1 bg-gray-700 text-white px-4 py-3 rounded-lg outline-none"
           />

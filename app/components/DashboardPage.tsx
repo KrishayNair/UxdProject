@@ -77,20 +77,32 @@ export default function DashboardPage({ onNavigate, onOpenDrawer }: DashboardPag
       <div className="px-6 mb-8">
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-xl font-bold">Previous Projects</h2>
-          <div className="w-9 h-9 border-2 border-white rounded-full flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer">
+          <button 
+            onClick={() => onNavigate('history')}
+            className="w-9 h-9 border-2 border-white rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
+          >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </div>
+          </button>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-3 scrollbar-hide -mx-1 px-1" style={{ WebkitOverflowScrolling: 'touch' }}>
-          <button className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95">
+          <button 
+            onClick={() => alert('Viewing project: Glass Bottle')}
+            className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95"
+          >
             Glass Bottle
           </button>
-          <button className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95">
+          <button 
+            onClick={() => alert('Viewing project: Cardboard Cutout')}
+            className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95"
+          >
             Cardboard Cutout
           </button>
-          <button className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95">
+          <button 
+            onClick={() => alert('Viewing project: Plastic container')}
+            className="bg-green-800/30 hover:bg-green-800/40 border border-green-600 rounded-full px-7 py-3 whitespace-nowrap text-sm font-medium shrink-0 transition-all active:scale-95"
+          >
             Plastic con
           </button>
         </div>
