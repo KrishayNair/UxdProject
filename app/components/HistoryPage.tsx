@@ -13,7 +13,7 @@ export default function HistoryPage({ variant = 'history', onOpenDrawer, onNavig
   if (variant === 'sound') {
     // Second screenshot variant with different sections
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white pb-24">
+    <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white pb-24">
       {/* Header */}
       <div className="flex justify-between items-center p-6 pt-12">
         <div>
@@ -229,7 +229,7 @@ export default function HistoryPage({ variant = 'history', onOpenDrawer, onNavig
 
   // First screenshot variant - simpler history page
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white pb-24">
+    <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white pb-24">
       {/* Header */}
       <div className="flex justify-between items-center p-6 pt-12">
         <h1 className="text-2xl font-bold">Your History</h1>

@@ -67,7 +67,7 @@ export default function ScanPage({ onBack, mode = 'waste', onOpenDrawer, onNavig
     : 'Scan your waste to get suggestions on what you can do to upcycle it';
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 relative overflow-hidden">
+    <div className="h-full w-full bg-gray-100 text-gray-900 relative overflow-hidden">
       {/* Header with better spacing */}
       <div className="absolute top-0 left-0 right-0 z-30 flex items-start justify-between px-4 pt-14 pb-4">
         <button

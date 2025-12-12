@@ -11,6 +11,7 @@ import ChatPage from './components/ChatPage';
 import SplashScreen from './components/SplashScreen';
 import OnboardingCarousel from './components/OnboardingCarousel';
 import LoginSignup from './components/LoginSignup';
+import PhoneFrame from './components/PhoneFrame';
 
 type Screen = 'dashboard' | 'progress' | 'history' | 'scan' | 'chat' | 'voice-chat' | 'waste-info' | 'featured';
 type BottomTab = 'home' | 'progress' | 'history' | 'profile';
@@ -113,38 +114,38 @@ export default function App() {
   // Handle auth flow
   if (authFlow === 'splash') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-        <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+      <PhoneFrame>
+        <div className="relative w-full h-full overflow-hidden bg-gradient-to-b from-green-900 to-black">
           <SplashScreen onComplete={() => setAuthFlow('onboarding')} />
         </div>
-      </div>
+      </PhoneFrame>
     );
   }
 
   if (authFlow === 'onboarding') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-        <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+      <PhoneFrame>
+        <div className="relative w-full h-full overflow-hidden bg-gradient-to-b from-green-50 to-white">
           <OnboardingCarousel onComplete={() => setAuthFlow('login')} />
         </div>
-      </div>
+      </PhoneFrame>
     );
   }
 
   if (authFlow === 'login') {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
-        <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+      <PhoneFrame>
+        <div className="relative w-full h-full overflow-hidden bg-gradient-to-b from-green-900 to-black">
           <LoginSignup onLogin={() => setAuthFlow('app')} />
         </div>
-      </div>
+      </PhoneFrame>
     );
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
+    <PhoneFrame>
       {/* Mobile Container - max width 375px to match mobile screenshots */}
-      <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+      <div className="relative w-full h-full overflow-hidden bg-gradient-to-b from-green-900 to-black">
         {/* Navigation Drawer */}
         <NavigationDrawer
           isOpen={isDrawerOpen}
@@ -192,6 +193,6 @@ export default function App() {
           />
         )}
       </div>
-    </div>
+    </PhoneFrame>
   );
 }

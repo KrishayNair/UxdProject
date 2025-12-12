@@ -44,7 +44,7 @@ export default function LoginSignup({ onLogin }: LoginSignupProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
+    <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
       {/* Header */}
       <div className="flex justify-center pt-12 pb-6">
         <div className="w-28 h-28 relative">

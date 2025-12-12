@@ -17,7 +17,7 @@ export default function SplashScreen({ onComplete }: SplashScreenProps) {
   }, [onComplete]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white flex items-center justify-center">
+    <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white flex items-center justify-center">
       <div className="flex flex-col items-center px-6">
         {/* App Logo - Large and Prominent */}
         <div className="w-56 h-56 sm:w-64 sm:h-64 mb-12 relative">

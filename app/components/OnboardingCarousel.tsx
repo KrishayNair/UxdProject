@@ -47,7 +47,7 @@ export default function OnboardingCarousel({ onComplete }: OnboardingCarouselPro
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white flex flex-col">
+    <div className="h-full w-full bg-gradient-to-b from-green-50 to-white flex flex-col">
       {/* Skip Button */}
       <div className="flex justify-end p-6 pt-12">
         <button

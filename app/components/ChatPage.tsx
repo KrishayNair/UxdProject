@@ -46,7 +46,7 @@ export default function ChatPage({ onBack, initialMode = 'menu', onOpenDrawer }:
 
   if (mode === 'voice') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
+      <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 pt-12">
           {onBack && (
@@ -116,7 +116,7 @@ export default function ChatPage({ onBack, initialMode = 'menu', onOpenDrawer }:
 
   if (mode === 'chat') {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
+      <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 pt-12">
           {onBack && (

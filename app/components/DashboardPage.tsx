@@ -7,7 +7,7 @@ interface DashboardPageProps {
 
 export default function DashboardPage({ onNavigate, onOpenDrawer }: DashboardPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-green-900 to-black text-white pb-28">
+    <div className="h-full w-full bg-gradient-to-b from-green-900 to-black text-white pb-28">
       {/* Header with better spacing */}
       <div className="flex justify-between items-start px-6 pt-14 pb-6">
         <div>
