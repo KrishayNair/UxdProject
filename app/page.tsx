@@ -8,11 +8,16 @@ import ProgressPage from './components/ProgressPage';
 import HistoryPage from './components/HistoryPage';
 import ScanPage from './components/ScanPage';
 import ChatPage from './components/ChatPage';
+import SplashScreen from './components/SplashScreen';
+import OnboardingCarousel from './components/OnboardingCarousel';
+import LoginSignup from './components/LoginSignup';
 
 type Screen = 'dashboard' | 'progress' | 'history' | 'scan' | 'chat' | 'voice-chat' | 'waste-info' | 'featured';
 type BottomTab = 'home' | 'progress' | 'history' | 'profile';
+type AuthFlow = 'splash' | 'onboarding' | 'login' | 'app';
 
 export default function App() {
+  const [authFlow, setAuthFlow] = useState<AuthFlow>('splash');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [currentScreen, setCurrentScreen] = useState<Screen>('dashboard');
   const [activeTab, setActiveTab] = useState<BottomTab>('home');
@@ -108,7 +113,38 @@ export default function App() {
     }
   };
 
-  const showBottomNav = !['scan', 'chat', 'voice-chat', 'waste-info'].includes(currentScreen);
+  const showBottomNav = !['scan', 'chat', 'voice-chat', 'waste-info'].includes(currentScreen) && authFlow === 'app';
+
+  // Handle auth flow
+  if (authFlow === 'splash') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
+        <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+          <SplashScreen onComplete={() => setAuthFlow('onboarding')} />
+        </div>
+      </div>
+    );
+  }
+
+  if (authFlow === 'onboarding') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
+        <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+          <OnboardingCarousel onComplete={() => setAuthFlow('login')} />
+        </div>
+      </div>
+    );
+  }
+
+  if (authFlow === 'login') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
+        <div className="relative w-full max-w-[375px] h-[812px] overflow-hidden bg-gradient-to-b from-green-900 to-black rounded-3xl shadow-2xl">
+          <LoginSignup onLogin={() => setAuthFlow('app')} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 p-4">
