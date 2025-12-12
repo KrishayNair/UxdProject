@@ -72,11 +72,6 @@ export default function App() {
           onOpenDrawer={showBottomNav && !isDrawerOpen ? () => setIsDrawerOpen(true) : undefined}
           onNavigate={(screen) => navigateToScreen(screen as Screen)}
         />;
-      case 'previous-projects':
-        return <HistoryPage 
-          variant="history" 
-          onNavigate={(screen) => navigateToScreen(screen as Screen)}
-        />;
       case 'scan':
         return <ScanPage 
           onBack={handleBack} 
